@@ -1,0 +1,19 @@
+# Browser
+cask "microsoft-edge"
+cask "google-chrome"
+
+# Storage & Notes
+cask "onedrive"
+cask "notion"
+cask "evernote"
+
+# Communication
+cask "slack"
+cask "discord"
+cask "zoom"
+
+# Dictionary tools
+cask "deepl"
+
+# Utilities
+cask "karabiner-elements"

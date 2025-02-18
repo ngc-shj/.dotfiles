@@ -1,0 +1,69 @@
+# Utility tools
+brew "stow"
+brew "jq"
+brew "yq"
+brew "peco"
+brew "nmap"
+brew "tree"
+brew "bat"
+
+# Golang
+brew "go"
+
+# Git related tools
+brew "git"
+brew "gh"
+brew "ghq"
+brew "git-secrets"
+brew "gibo"
+
+# Docker (choose one)
+# brew "docker"   # Use this if avoiding Docker Desktop
+cask "docker"    # Use this for Docker Desktop (requires payment for commercial use)
+
+# env tools
+brew "tfenv"
+brew "pipenv"
+brew "pyenv"
+brew "rbenv"
+
+# Terraform tools
+brew "tflint"
+
+# Java tools
+if OS.mac?
+    cask "corretto11"
+end
+brew "maven"
+brew "gradle"
+
+# Swift tools
+if OS.mac?
+    brew "swiftlint"
+end
+
+# Vim/Neovim
+brew "neovim"
+
+# AWS tools
+brew "awscli"
+brew "git-remote-codecommit"
+
+if OS.mac?
+    tap "iann0036/iamlive"
+    brew "iann0036/iamlive/iamlive"
+end
+
+tap "donngi/awsmfa"
+brew "donngi/awsmfa/awsmfa"
+
+tap "donngi/pipeline-lens"
+brew "donngi/pipeline-lens/pipeline-lens"
+
+cask "session-manager-plugin"
+
+# Fonts
+if OS.mac?
+    tap "delphinus/sfmono-square"
+    brew "sfmono-square"
+end

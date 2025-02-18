@@ -1,0 +1,4 @@
+# Editors
+cask "visual-studio-code"
+cask "cursor"
+# cask "intellij-idea-ce"

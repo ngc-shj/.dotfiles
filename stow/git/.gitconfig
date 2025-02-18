@@ -1,0 +1,28 @@
+[core]
+	pager = less -cm
+	quotepath = false
+	editor = vim
+
+[user]
+	[includeIf "gitdir:ghq/github.com/"]
+		path = ~/.gitconfig_gh
+	[includeIf "gitdir:venv"]
+		path = ~/.gitconfig_gh
+	[includeIf "gitdir:venv/hf"]
+		path = ~/.gitconfig_hf
+
+[credential]
+	helper = store
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[github]
+	user = ngc-shj
+
+[ghq]
+	root = /home/shoji_noguchi/ghq
+
