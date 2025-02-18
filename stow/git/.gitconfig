@@ -4,11 +4,11 @@
 	editor = vim
 
 [user]
-	[includeIf "gitdir:ghq/github.com/"]
+	[includeIf "gitdir:~/ghq/github.com/"]
 		path = ~/.gitconfig_gh
-	[includeIf "gitdir:venv"]
+	[includeIf "gitdir:~/venv"]
 		path = ~/.gitconfig_gh
-	[includeIf "gitdir:venv/hf"]
+	[includeIf "gitdir:~/venv/hf"]
 		path = ~/.gitconfig_hf
 
 [credential]
