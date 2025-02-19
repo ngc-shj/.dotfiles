@@ -1,3 +1,0 @@
-alias apt='sudo apt'
-alias apt-get='sudo apt-get'
-alias service='sudo systemctl'

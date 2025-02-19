@@ -1,6 +1,2 @@
-#
-alias cd_venv="cd $HOME/venv"
-
 # macOS like
 alias open="/mnt/c/Windows/explorer.exe"
-#

@@ -3,24 +3,22 @@ set -e
 
 echo "🚀 Installing GUI development tools using winget..."
 
-/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command "
-\$packages = @(
-    'Microsoft.VisualStudioCode'
-)
-
-foreach (\$package in \$packages) {
-    if (winget list --id \$package | Select-String \$package) {
-        Write-Host '✅' \$package 'is already installed. Skipping...'
-    } else {
-        Write-Host '🔧 Installing' \$package '...'
-        winget install --id=\$package -e --source winget
-        if (\$LASTEXITCODE -ne 0) {
-            Write-Host '⚠️ Error installing' \$package ', but continuing setup...'
-        } else {
-            Write-Host '✅' \$package 'installed successfully.'
-        }
-    }
-}
+packages="
+Microsoft.VisualStudioCode
 "
+
+for package in $packages; do
+    if winget.exe list --id $package | grep -q $package; then
+        echo "✅ $package is already installed. Skipping..."
+    else
+        echo "🔧 Installing $package ..."
+        winget.exe install --id=$package -e --source winget
+        if [ $? -ne 0 ]; then
+            echo "⚠️ Error installing $package , but continuing setup..."
+        else
+            echo "✅ $package installed successfully."
+        fi
+    fi
+done
 
 echo "✅ GUI development tools installation complete"

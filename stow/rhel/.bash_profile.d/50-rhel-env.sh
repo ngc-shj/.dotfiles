@@ -1,5 +1,3 @@
-# User specific environment and startup programs
-
 # SSH Agent
 SSH_AGENT_INFO=~/.ssh-agent-info
 

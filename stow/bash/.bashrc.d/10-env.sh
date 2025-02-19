@@ -1,19 +1,10 @@
 
-# zsh
-export ZDOTDIR=$HOME
-export ZSHRC_DIR=$HOME/.zshrc.d
-
-# zsh-history
-export HISTSIZE=1000000
-export SAVEHIST=1000000
-
-# TCL/TK
-[[ -d /usr/local/opt/tcl-tk/ ]] && {
-    export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
-    export LDFLAGS="-L/usr/local/opt/tcl-tk/lib $LDFLAGS"
-    export CPPFLAGS="-I/usr/local/opt/tcl-tk/include $CPPFLAGS"
-    export PKG_CONFIG_PATH="/usr/local/opt/tcl-tk/lib/pkgconfig:$PKG_CONFIG_PATH"
-}
+# Homebrew
+if [ -d "/opt/homebrew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # Golang
 if [ -d "$HOME/go" ]; then
