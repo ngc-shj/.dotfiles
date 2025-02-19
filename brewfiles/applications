@@ -3,17 +3,21 @@ cask "microsoft-edge"
 cask "google-chrome"
 
 # Storage & Notes
-cask "onedrive"
+#cask "onedrive"
 cask "notion"
-cask "evernote"
+mas "evernote", id: 406056744
 
 # Communication
-cask "slack"
-cask "discord"
 cask "zoom"
+cask "discord"
+cask "microsoft-teams"
+mas "Slack", id: 803453959
+mas "line", id: 539883307
+
 
 # Dictionary tools
 cask "deepl"
 
 # Utilities
 cask "karabiner-elements"
+cask "microsoft-office"

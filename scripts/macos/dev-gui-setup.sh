@@ -3,6 +3,6 @@ set -e
 
 echo "🚀 Installing GUI applications using Homebrew..."
 
-brew bundle --file="$HOME/.dotfiles/Brewfiles/dev-gui"
+brew bundle --file="$HOME/.dotfiles/brewfiles/dev-gui"
 
 echo "✅ GUI applications installation complete"

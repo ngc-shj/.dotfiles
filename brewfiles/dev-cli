@@ -31,9 +31,7 @@ brew "rbenv"
 brew "tflint"
 
 # Java tools
-if OS.mac?
-    cask "corretto11"
-end
+cask "corretto@21"
 brew "maven"
 brew "gradle"
 
@@ -49,11 +47,6 @@ brew "neovim"
 brew "awscli"
 brew "git-remote-codecommit"
 
-if OS.mac?
-    tap "iann0036/iamlive"
-    brew "iann0036/iamlive/iamlive"
-end
-
 tap "donngi/awsmfa"
 brew "donngi/awsmfa/awsmfa"
 
@@ -62,8 +55,16 @@ brew "donngi/pipeline-lens/pipeline-lens"
 
 cask "session-manager-plugin"
 
+if OS.mac?
+    tap "iann0036/iamlive"
+    brew "iann0036/iamlive/iamlive"
+    cask "amazon-q"
+end
+
+
 # Fonts
 if OS.mac?
+    brew "fontforge"
     tap "delphinus/sfmono-square"
     brew "sfmono-square"
 end

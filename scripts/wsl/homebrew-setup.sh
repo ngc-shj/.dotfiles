@@ -19,7 +19,7 @@ else
 fi
 
 echo "🔄 Running brew bundle for Homebrew taps..."
-brew bundle --file="$HOME/.dotfiles/Brewfiles/homebrew"
+brew bundle --file="$HOME/.dotfiles/brewfiles/homebrew"
 
 echo "✅ Homebrew setup complete"
 
