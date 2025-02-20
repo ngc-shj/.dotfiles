@@ -18,6 +18,7 @@ alias glo='git log --pretty="oneline"'
 alias glol='git log --graph --oneline --decorate'
 
 # ls aliases
+eval "$(dircolors -b $XDG_CONFIG_HOME/dircolors/dircolors)"
 alias ls='gls --color=auto'
 alias ll='gls -l --color=auto'
 alias la='gls -la --color=auto'

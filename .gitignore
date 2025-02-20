@@ -129,6 +129,9 @@ stow/xdg_config/git/*
 !stow/xdg_config/git/*.conf
 !stow/xdg_config/git/ignore
 
+# dircolors
+stow/xdg_config/dircolors/*
+
 # nvim
 stow/xdg_config/nvim/*
 !stow/xdg_config/nvim/init.vim
