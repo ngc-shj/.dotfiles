@@ -2,7 +2,7 @@
 # WSL specific environment settings
 if [ "$WSL_DISTRO_NAME" ]; then
     # SSH Agent relay
-    export SSH_AUTH_SOCK=$HOME/.ssh/ssh-agent.sock
+    export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
     ss -a | grep -q $SSH_AUTH_SOCK
     if [ $? -ne 0 ]; then
         rm -f $SSH_AUTH_SOCK
@@ -15,7 +15,7 @@ fi
 # Linux specific environment settings
 if [ $(uname) = "Linux" ]; then
     # SSH Agent
-    SSH_AGENT_INFO_FILE=~/.ssh/.ssh-agent-info
+    SSH_AGENT_INFO_FILE=~/.ssh/agent-info
 
     echo -n "ssh-agent: "
     if [ -f "$SSH_AGENT_INFO_FILE" ]; then
