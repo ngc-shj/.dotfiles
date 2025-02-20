@@ -34,7 +34,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -115,3 +116,7 @@ tags
 *.ori
 *.orig
 *.tmp
+
+# nvim
+stow/xdg_config/nvim
+!stow/xdg_config/nvim/init.vim

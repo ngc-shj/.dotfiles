@@ -17,14 +17,33 @@ alias grs='git remote show'
 alias glo='git log --pretty="oneline"'
 alias glol='git log --graph --oneline --decorate'
 
-
 # ls aliases
-alias ls='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias la='ls -la --color=auto'
-alias l='ls -lA --color=auto'
+alias ls='gls --color=auto'
+alias ll='gls -l --color=auto'
+alias la='gls -la --color=auto'
+alias l='gls -lA --color=auto'
 
 # grep aliases
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+
+# nvim aliases
+alias vim='nvim'
+alias vi='nvim'
+
+# tmux aliases
+alias tmux='tmux -2'
+
+# python aliases
+alias py='python'
+alias py3='python3'
+alias pip='pip3'
+alias ipy='ipython'
+
+# docker aliases
+alias dc='docker-compose'
+alias d='docker'    # docker is a common typo
+
+# kubectl aliases
+alias k='kubectl'
