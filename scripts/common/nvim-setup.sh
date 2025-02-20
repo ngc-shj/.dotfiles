@@ -10,7 +10,7 @@ mkdir -p $XDG_CONFIG_HOME/nvim/colors $XDG_CONFIG_HOME/nvim/bundle $XDG_CONFIG_H
 if [ ! -f "$XDG_CONFIG_HOME/nvim/autoload/plug.vim" ]; then
     echo "🔧 Installing vim-plug..."
     curl -fLo $XDG_CONFIG_HOME/nvim/autoload/plug.vim --create-dirs \
-        https://github.com/junegunn/vim-plug
+        https://github.com/junegunn/vim-plug/plug.vim
 fi
 
 # Clone or update Solarized theme

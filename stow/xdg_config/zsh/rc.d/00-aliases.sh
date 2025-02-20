@@ -31,6 +31,7 @@ alias fgrep='fgrep --color=auto'
 # nvim aliases
 alias vim='nvim'
 alias vi='nvim'
+alias view='nvim -R'
 
 # tmux aliases
 alias tmux='tmux -2'

@@ -15,3 +15,9 @@ if [ -d "$XDG_CONFIG_HOME/bash/rc.d" ]; then
         [ -r "$rc" ] && . "$rc"
     done
 fi
+
+if [ -d "$XDG_CONFIG_HOME/zsh/rc.d" ]; then
+    for rc in "$XDG_CONFIG_HOME/zsh/rc.d/"*.sh; do
+        [ -r "$rc" ] && . "$rc"
+    done
+fi

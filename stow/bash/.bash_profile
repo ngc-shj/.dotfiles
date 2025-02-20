@@ -10,3 +10,9 @@ if [ -d "$XDG_CONFIG_HOME/bash/profile.d" ]; then
         [ -r "$rc" ] && . "$rc"
     done
 fi
+
+if [ -d "$XDG_CONFIG_HOME/zsh/profile.d" ]; then
+    for rc in "$XDG_CONFIG_HOME/zsh/profile.d/"*.sh; do
+        [ -r "$rc" ] && . "$rc"
+    done
+fi

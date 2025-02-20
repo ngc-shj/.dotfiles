@@ -1,8 +1,10 @@
 # tap "homebrew/cask"
 # tap "homebrew/cask-versions"
 
-# zsh plugins
+# core
 brew "coreutils"
+
+# zsh plugins
 brew "zsh"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
