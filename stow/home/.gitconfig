@@ -5,14 +5,14 @@
 
 [user]
 	[includeIf "gitdir:~/ghq/github.com/"]
-		path = ~/.gitconfig_gh
+		path = ~/.config/git/github.conf
 	[includeIf "gitdir:~/venv"]
-		path = ~/.gitconfig_gh
+		path = ~/.config/git/github.conf
 	[includeIf "gitdir:~/venv/hf"]
-		path = ~/.gitconfig_hf
+		path = ~/.config/git/huggingface.conf
 
 [credential]
-	helper = store
+	helper = cache --timeout=86400
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -20,9 +20,8 @@
 	process = git-lfs filter-process
 	required = true
 
-[github]
-	user = ngc-shj
-
 [ghq]
 	root = ~/ghq
 
+[github]
+	user = ngc-shj

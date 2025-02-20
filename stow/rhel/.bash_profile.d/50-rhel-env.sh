@@ -1,16 +1,22 @@
 # SSH Agent
-SSH_AGENT_INFO=~/.ssh-agent-info
+SSH_AGENT_INFO_FILE=~/.ssh/.ssh-agent-info
 
 echo -n "ssh-agent: "
-source $SSH_AGENT_INFO
-ssh-add -l >&/dev/null
-if [ $? == 2 ] ; then
-    echo -n "ssh-agent: restart...."
-    ssh-agent > $SSH_AGENT_INFO
-    source $SSH_AGENT_INFO
+if [ -f "$SSH_AGENT_INFO_FILE" ]; then
+    source "$SSH_AGENT_INFO_FILE"
+    ssh-add -l >&/dev/null
+    if [ $? -eq 2 ]; then
+        echo -n "ssh-agent: restart...."
+        ssh-agent > "$SSH_AGENT_INFO_FILE"
+        source "$SSH_AGENT_INFO_FILE"
+    fi
+else
+    echo -n "ssh-agent: start...."
+    ssh-agent > "$SSH_AGENT_INFO_FILE"
+    source "$SSH_AGENT_INFO_FILE"
 fi
 
-if ssh-add -l >&/dev/null ; then
+if ssh-add -l >&/dev/null; then
     echo "ssh-agent: Identity is already stored."
 else
     ssh-add
