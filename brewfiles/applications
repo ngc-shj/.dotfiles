@@ -11,12 +11,16 @@ mas "evernote", id: 406056744
 cask "zoom"
 cask "discord"
 cask "microsoft-teams"
+cask "webex"
 mas "Slack", id: 803453959
 mas "line", id: 539883307
 
-
 # Dictionary tools
 cask "deepl"
+
+# AI tools
+cask "chatgpt"
+cask "ollama"
 
 # Utilities
 cask "karabiner-elements"
