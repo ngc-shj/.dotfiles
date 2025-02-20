@@ -61,7 +61,6 @@ if OS.mac?
     cask "amazon-q"
 end
 
-
 # Fonts
 if OS.mac?
     brew "fontforge"

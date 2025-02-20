@@ -30,9 +30,6 @@ source "$SCRIPT_DIR/homebrew-setup.sh"
 echo "🔧 Setting up CLI development tools..."
 bash "$SCRIPT_DIR/dev-cli-setup.sh"
 
-echo "🔧 Setting up Vim..."
-bash "$SCRIPT_TOPDIR/common/vim-setup.sh"
-
 if [ "$OS_DIR" == "macos" ]; then
     echo "🔧 Setting up development GUI tools..."
     bash "$SCRIPT_DIR/dev-gui-setup.sh"
@@ -49,6 +46,12 @@ fi
 
 echo "🔧 Applying dotfiles using stow..."
 bash "$SCRIPT_DIR/stow-setup.sh"
+
+echo "🔧 Setting up neovim..."
+bash "$SCRIPT_TOPDIR/common/nvim-setup.sh"
+
+echo "🔧 Setting up dircolors configuration..."
+bash "$SCRIPT_TOPDIR/common/dircolors-setup.sh"
 
 echo "🎉 Setup completed successfully!"
 
