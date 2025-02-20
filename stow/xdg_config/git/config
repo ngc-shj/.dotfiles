@@ -5,11 +5,11 @@
 
 [user]
 	[includeIf "gitdir:~/ghq/github.com/"]
-		path = ~/.config/git/github.conf
+		path = ./github.conf
 	[includeIf "gitdir:~/venv"]
-		path = ~/.config/git/github.conf
+		path = /github.conf
 	[includeIf "gitdir:~/venv/hf"]
-		path = ~/.config/git/huggingface.conf
+		path = ./huggingface.conf
 
 [credential]
 	helper = cache --timeout=86400

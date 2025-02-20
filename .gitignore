@@ -117,6 +117,18 @@ tags
 *.orig
 *.tmp
 
+# bash
+stow/xdg_config/bash/rc.d/local.sh
+
+# zsh
+stow/xdg_config/zsh/rc.d/local.zsh
+
+# git
+stow/xdg_config/git/*
+!stow/xdg_config/git/config
+!stow/xdg_config/git/*.conf
+!stow/xdg_config/git/ignore
+
 # nvim
-stow/xdg_config/nvim
+stow/xdg_config/nvim/*
 !stow/xdg_config/nvim/init.vim

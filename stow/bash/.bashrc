@@ -1,17 +1,17 @@
 #!/bin/bash
 
+# Environment Variables
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-if [ -d "$HOME/.bashrc.d" ]; then
-    for rc in "$HOME/.bashrc.d/"*.sh; do
+if [ -d "$XDG_CONFIG_HOME/bash/rc.d" ]; then
+    for rc in "$XDG_CONFIG_HOME/bash/rc.d/"*.sh; do
         [ -r "$rc" ] && . "$rc"
     done
-fi
-
-# User specific environment and startup programs
-if [ -f ~/.bashrc.local ]; then
-    . ~/.bashrc.local
 fi

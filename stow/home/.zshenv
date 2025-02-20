@@ -2,8 +2,8 @@
 
 # Environment Variables
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
-export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 mkdir -p $XDG_CONFIG_HOME
@@ -12,7 +12,7 @@ mkdir -p $XDG_CACHE_HOME/zsh
 mkdir -p $ZDOTDIR
 
 # History
-export HISTFILE="$XDG_CACHE_HOME/zsh/history"
+export HISTFILE="$ZDOTDIR/history"
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
