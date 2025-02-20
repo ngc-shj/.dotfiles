@@ -41,7 +41,7 @@ zstyle ':completion:*' completer _extensions _complete _approximate
 
 # Caching the Completion
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompcache"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 # The Completion Menu
 zstyle ':completion:*' menu select
 
