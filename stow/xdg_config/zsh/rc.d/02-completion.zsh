@@ -75,9 +75,13 @@ zstyle ':completion:*' file-sort change reverse
 # Completion Matching Control
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# ------------------------------------------------------------------------
-# npm
-# ------------------------------------------------------------------------
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
 
-eval "npm completion" > /dev/null 
-# eval "pnpm completion zsh" > /dev/null
+# npm completion
+if [ command -v npm >/dev/null 2>&1 ]; then
+    eval "npm completion" > /dev/null
+fi
