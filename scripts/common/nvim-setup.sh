@@ -22,10 +22,10 @@ ln -sf $(ghq root)/$VIM_PLUG_URL/plug.vim $XDG_CONFIG_HOME/nvim/autoload/plug.vi
 echo "🔧 Downloading vim-colors-solarized..."
 SOLARIZED_GIT_URL="github.com/altercation/vim-colors-solarized"
 ghq get -u -p $SOLARIZED_GIT_URL
-SOLARIZED_DIR="$XDG_CONFIG_HOME/nvim/bundle/vim-colors-solarized"
-ln -sf $(ghq root)/$SOLARIZED_GIT_URL $SOLARIZED_DIR
 
 echo "🔗 Creating symlink for solarized color scheme..."
+SOLARIZED_DIR="$XDG_CONFIG_HOME/nvim/bundle/vim-colors-solarized"
+ln -sf $(ghq root)/$SOLARIZED_GIT_URL $SOLARIZED_DIR
 ln -sf "$SOLARIZED_DIR/colors/solarized.vim" $XDG_CONFIG_HOME/nvim/colors/solarized.vim
 
 echo "✅ nvim setup complete!"

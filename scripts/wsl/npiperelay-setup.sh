@@ -6,7 +6,7 @@ echo "🚀 Setting up npiperelay for WSL2..."
 # Check if npiperelay is already installed
 if command -v npiperelay.exe &>/dev/null; then
     echo "🚫 npiperelay.exe is already installed. Exiting..."
-    exit 1
+    exit 0
 fi
 
 # Check if Go is installed
