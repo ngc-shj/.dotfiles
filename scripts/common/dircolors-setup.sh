@@ -17,11 +17,8 @@ DIRCOLORS_GIT_URL="github.com/seebi/dircolors-solarized"
 ghq get -u -p $DIRCOLORS_GIT_URL
 
 echo "🔗 Creating symlink for dircolors..."
-ln -sf $(ghq root)/$DIRCOLORS_GIT_URL/dircolors.256dark $DIRCOLORS_DIR/dircolors.256dark
-ln -sf $(ghq root)/$DIRCOLORS_GIT_URL/dircolors.ansi-dark $DIRCOLORS_DIR/dircolors.ansi-dark
-ln -sf $(ghq root)/$DIRCOLORS_GIT_URL/dircolors.ansi-light $DIRCOLORS_DIR/dircolors.ansi-light
-ln -sf $(ghq root)/$DIRCOLORS_GIT_URL/dircolors.ansi-universal $DIRCOLORS_DIR/dircolors.ansi-universal
+ln -sf $(ghq root)/$DIRCOLORS_GIT_URL $DIRCOLORS_DIR/dircolors-solarized
 
-(cd $DIRCOLORS_DIR && ln -sf dircolors.ansi-dark dircolors)
+(cd $DIRCOLORS_DIR && ln -sf dircolors-solarized/dircolors.256dark dircolors)
 
 echo "✅ dircolors setup complete!"

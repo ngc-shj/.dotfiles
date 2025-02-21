@@ -121,6 +121,7 @@ tags
 stow/xdg_config/bash/rc.d/local.sh
 
 # zsh
+stow/xdg_config/zsh/purification/*
 stow/xdg_config/zsh/rc.d/local.zsh
 
 # git
