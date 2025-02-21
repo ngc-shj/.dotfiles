@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # WSL-specific environment settings
 if [ -z "$WSL_DISTRO_NAME" ]; then
     return

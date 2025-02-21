@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 # Load prompt
 fpath+=($ZDOTDIR/purification)

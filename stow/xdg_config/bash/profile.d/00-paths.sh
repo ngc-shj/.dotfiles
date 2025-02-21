@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Homebrew
 if [ "$(uname)" = "Darwin" ]; then
     [[ -d "/opt/homebrew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"

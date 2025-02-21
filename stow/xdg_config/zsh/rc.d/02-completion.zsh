@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # References:
 # [16 Options](https://zsh.sourceforge.io/Doc/Release/Options.html)
 # [19 Completion Widgets](https://zsh.sourceforge.io/Doc/Release/Completion-Widgets.html#Completion-Matching-Control)

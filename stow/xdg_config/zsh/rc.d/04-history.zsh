@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 # History
 setopt share_history

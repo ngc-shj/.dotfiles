@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Git aliases
 alias gs='git status'
 alias ga='git add'

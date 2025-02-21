@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # Reset to default keybind
 bindkey -d
 

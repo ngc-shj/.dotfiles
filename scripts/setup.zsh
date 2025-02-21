@@ -1,5 +1,4 @@
 #!/bin/zsh
-
 set -e  # Exit immediately if a command exits with a non-zero status
 
 setopt null_glob  # If a glob does not match, remove it from the list of arguments
