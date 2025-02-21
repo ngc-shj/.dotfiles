@@ -30,7 +30,7 @@ run_scripts() {
     for script in "$SCRIPT_DIR/common/"$category-setup.(zsh|sh) "$SCRIPT_DIR/$OS/"$category-setup.(zsh|sh); do
         if [[ -f "$script" ]]; then
             echo "🔧 Executing: $script"
-            zsh "$script"
+            builtin source "$script"
             echo "✅ $category setup complete!"
             break
         fi
@@ -39,9 +39,12 @@ run_scripts() {
 
 # Run setup scripts for each category
 run_scripts "homebrew"
+#
+run_scripts "core"
 run_scripts "dev-cli"
 run_scripts "dev-gui"
 run_scripts "applications"
+#
 run_scripts "stow"
 
 # Run other setup scripts
@@ -53,7 +56,7 @@ for script in "$SCRIPT_DIR/common/"*.(zsh|sh) "$SCRIPT_DIR/$OS/"*.(zsh|sh); do
             ;;
         *)
             echo "🔧 Executing: $script"
-            zsh "$script"
+            builtin source "$script"
             echo "✅ Setup complete!"
             ;;
     esac

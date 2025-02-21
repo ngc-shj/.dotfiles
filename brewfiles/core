@@ -3,9 +3,10 @@
 
 # core
 brew "coreutils"
+brew "zsh"
 
 # zsh plugins
-brew "zsh"
+brew "pure"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
@@ -13,5 +14,3 @@ brew "zsh-history-substring-search"
 brew "zsh-navigation-tools"
 
 brew "socat"
-
-brew "pure"
