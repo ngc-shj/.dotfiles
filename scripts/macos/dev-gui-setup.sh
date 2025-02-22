@@ -5,4 +5,4 @@ echo "🚀 Installing GUI applications using Homebrew..."
 
 brew bundle --file="$HOME/.dotfiles/brewfiles/dev-gui"
 
-echo "✅ GUI applications installation complete"
+echo "✅ GUI applications installation complete!"

@@ -5,4 +5,4 @@ echo "🚀 Installing Core tools using Homebrew..."
 
 brew bundle --file="$HOME/.dotfiles/brewfiles/core"
 
-echo "✅ Core setup complete"
+echo "✅ Core tools installation complete!"
