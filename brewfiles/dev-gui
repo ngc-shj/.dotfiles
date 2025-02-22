@@ -1,4 +1,6 @@
 # Editors
+# cask "intellij-idea-ce"
 cask "visual-studio-code"
 cask "cursor"
-# cask "intellij-idea-ce"
+cask "iterm2"
+cask "itermai"
