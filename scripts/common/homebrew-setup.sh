@@ -3,7 +3,7 @@ set -e  # Exit on error
 
 if command -v brew &>/dev/null; then
     echo "✅ Homebrew is already installed"
-    exit 0
+    return
 fi
 
 HOME_BREW_URL="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
