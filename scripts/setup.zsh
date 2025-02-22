@@ -48,7 +48,7 @@ run_scripts "stow"
 # Run other setup scripts
 for script in "$SCRIPT_DIR/common/"*.(zsh|sh) "$SCRIPT_DIR/$OS/"*.(zsh|sh); do
     case "$script" in
-        *homebrew-setup.sh|*dev-cli-setup.sh|*dev-gui-setup.sh|*applications-setup.sh|*stow-setup.sh)
+        *core-setup.sh|*homebrew-setup.sh|*dev-cli-setup.sh|*dev-gui-setup.sh|*applications-setup.sh|*stow-setup.sh)
             # Skip category setup scripts
             continue
             ;;
