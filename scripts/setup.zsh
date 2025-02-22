@@ -26,12 +26,10 @@ echo "✅ Detected environment: $OS"
 # Function to run setup scripts for a given category
 run_scripts() {
     local category="$1"
-    echo "🔧 Setting up $category..."
     for script in "$SCRIPT_DIR/common/"$category-setup.(zsh|sh) "$SCRIPT_DIR/$OS/"$category-setup.(zsh|sh); do
         if [[ -f "$script" ]]; then
             echo "🔧 Executing: $script"
             builtin source "$script"
-            echo "✅ $category setup complete!"
             break
         fi
     done
@@ -57,7 +55,6 @@ for script in "$SCRIPT_DIR/common/"*.(zsh|sh) "$SCRIPT_DIR/$OS/"*.(zsh|sh); do
         *)
             echo "🔧 Executing: $script"
             builtin source "$script"
-            echo "✅ Setup complete!"
             ;;
     esac
 done
