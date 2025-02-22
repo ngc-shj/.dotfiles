@@ -3,6 +3,7 @@ brew "coreutils"
 brew "zsh"
 
 # zsh plugins
+brew "zplug"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
