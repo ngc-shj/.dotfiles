@@ -19,6 +19,6 @@ ghq get -u -p $DIRCOLORS_GIT_URL
 echo "🔗 Creating symlink for dircolors..."
 ln -sf $(ghq root)/$DIRCOLORS_GIT_URL $DIRCOLORS_DIR/dircolors-solarized
 
-(cd $DIRCOLORS_DIR && ln -sf dircolors-solarized/dircolors.256dark dircolors)
+(cd $DIRCOLORS_DIR && ln -sf dircolors-solarized/dircolors.ansi-light dircolors)
 
 echo "✅ dircolors setup complete!"

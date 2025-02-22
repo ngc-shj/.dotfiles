@@ -1,16 +1,14 @@
-# tap "homebrew/cask"
-# tap "homebrew/cask-versions"
-
 # core
 brew "coreutils"
 brew "zsh"
 
 # zsh plugins
-brew "pure"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
-brew "zsh-navigation-tools"
+
+# Zsh prompt
+brew "pure"
 
 brew "socat"
