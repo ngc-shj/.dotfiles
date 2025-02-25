@@ -51,3 +51,6 @@ alias d='docker'    # docker is a common typo
 
 # kubectl aliases
 alias k='kubectl'
+
+# wget aliases
+alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'

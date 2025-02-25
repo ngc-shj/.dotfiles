@@ -16,6 +16,7 @@ WIN_USERNAME=$(powershell.exe '$env:UserName' | tr -d '\r\n')
 path_append /mnt/c/Users/${WIN_USERNAME}/AppData/Local/Microsoft/WindowsApps
 
 # CUDA
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/lib/wsl/lib:${LD_LIBRARY_PATH}"
 export LDFLAGS="${LDFLAGS} -L/usr/lib/wsl/lib"
 export CUDA_VISIBLE_DEVICES=1,0

@@ -1,9 +1,5 @@
 # nvm
-if [ -d "$HOME/.nvm" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if [ -d "$XDG_DATA_HOME"/nvm ]; then
+    export NVM_DIR="$XDG_DATA_HOME"/nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 fi
-
-# if command -v nvm >/dev/null 2>&1; then
-#   alias nvm="unalias nvm; export NVM_DIR=\"$HOME/.nvm\"; [ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"; nvm"
-# fi

@@ -3,7 +3,8 @@
 # History
 setopt share_history
 
-export HISTFILE="$ZDOTDIR/history"
+mkdir -p "$XDG_STATE_HOME"/zsh
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
