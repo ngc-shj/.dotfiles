@@ -1,6 +1,9 @@
 #!/bin/zsh
 
 # Load prompt
-fpath+=($ZDOTDIR/purification)
+# fpath+=($ZDOTDIR/purification)
+# autoload -Uz promptinit && promptinit
+# prompt_purification_setup
+
 autoload -Uz promptinit && promptinit
-prompt_purification_setup
+prompt pure
