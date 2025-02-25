@@ -6,9 +6,6 @@ if command -v brew &>/dev/null; then
     return
 fi
 
-HOME_BREW_URL="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
-HOME_BREW_INSTALLER="/bin/bash -c $(curl -fsSL $HOME_BREW_URL)"
-
 # Detect OS to determine installation method
 if [[ "$OSTYPE" = "darwin"* ]]; then
     HOME_BREW_PATH="/opt/homebrew/bin/brew"
@@ -41,6 +38,6 @@ echo "🚀 Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     
 # Add Homebrew to PATH
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$($HOME_BREW_PATH shellenv)"
 
 echo "✅ Homebrew installation complete!"
