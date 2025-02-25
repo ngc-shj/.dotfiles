@@ -1,3 +1,6 @@
+# Lang
+export LANG="ja_JP.UTF-8"
+
 # Editor
 export EDITOR="nvim"
 export VISUAL="nvim"
