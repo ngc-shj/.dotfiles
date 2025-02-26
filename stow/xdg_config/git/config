@@ -4,12 +4,7 @@
 	editor = vim
 
 [user]
-	[includeIf "gitdir:~/ghq/github.com/"]
-		path = ./github.conf
-	[includeIf "gitdir:~/venv"]
-		path = /github.conf
-	[includeIf "gitdir:~/venv/hf"]
-		path = ./huggingface.conf
+	name = NOGUCHI Shoji
 
 [credential]
 	helper = cache --timeout=86400
@@ -25,3 +20,15 @@
 
 [github]
 	user = ngc-shj
+
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/**"]
+	path = ~/.config/git/github.conf
+
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+	path = ~/.config/git/github.conf
+
+[includeIf "hasconfig:remote.*.url:ssh://git@hf.co/**"]
+	path = ~/.config/git/huggingface.conf
+
+[includeIf "hasconfig:remote.*.url:https://huggingface.co/**"]
+	path = ~/.config/git/huggingface.conf

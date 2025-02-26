@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# History
 setopt share_history
+setopt hist_ignore_space
 
 mkdir -p "$XDG_STATE_HOME"/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history

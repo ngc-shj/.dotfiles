@@ -136,3 +136,6 @@ stow/xdg_config/dircolors/*
 # nvim
 stow/xdg_config/nvim/*
 !stow/xdg_config/nvim/init.vim
+
+# credentials
+*credentials*
