@@ -5,6 +5,7 @@
 
 [user]
 	name = NOGUCHI Shoji
+	email = github.com@jpng.jp
 
 [credential]
 	helper = cache --timeout=86400

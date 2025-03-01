@@ -9,7 +9,7 @@ colorscheme solarized
 
 " Set encoding and file formats
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,shift_jis,utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,shift_jis
 set fileformats=unix,dos,mac
 
 " Set tab width
