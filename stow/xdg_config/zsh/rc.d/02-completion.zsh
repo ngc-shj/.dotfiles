@@ -47,8 +47,8 @@ setopt extended_glob        # 拡張グロブで補完(~とか^とか。例え�
 setopt globdots             # 明確なドットの指定なしで.から始まるファイルをマッチ
 setopt pushd_ignore_dups    # 重複するディレクトリを追加しない
 setopt pushd_silent         # pushd/popd時にディレクトリスタックの内容を表示しない
-setopt correct_all          # 誤ったコマンドを修正する
-setopt correct              # 誤ったコマンドを修正する
+#setopt correct_all          # 誤ったコマンドを修正する
+#setopt correct              # 誤ったコマンドを修正する
 
 # 
 zstyle ':completion:*' verbose yes
@@ -93,4 +93,9 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 # npm completion
 if [ command -v npm >/dev/null 2>&1 ]; then
     eval "npm completion" > /dev/null
+fi
+
+# api_creds completion
+if command -v api_creds >/dev/null 2>&1; then
+    source <(api_creds completion zsh)
 fi
