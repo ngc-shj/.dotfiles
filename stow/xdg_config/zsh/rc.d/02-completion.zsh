@@ -95,7 +95,7 @@ if [ command -v npm >/dev/null 2>&1 ]; then
     eval "npm completion" > /dev/null
 fi
 
-# api_creds completion
-if command -v api_creds >/dev/null 2>&1; then
-    source <(api_creds completion zsh)
+# api-creds completion
+if command -v api-creds >/dev/null 2>&1; then
+    source <(api-creds completion zsh)
 fi
