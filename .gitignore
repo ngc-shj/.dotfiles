@@ -124,6 +124,9 @@ stow/xdg_config/bash/rc.d/local.sh
 stow/xdg_config/zsh/purification/*
 stow/xdg_config/zsh/rc.d/local.zsh
 
+# ssh
+stow/home/.ssh/conf.d/*/config
+
 # git
 stow/xdg_config/git/*
 !stow/xdg_config/git/config
