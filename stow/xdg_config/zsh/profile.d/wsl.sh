@@ -1,5 +1,17 @@
+# Most reliable WSL2 detection method
+# Check /proc/version for Microsoft WSL2 signature
+
+is_wsl2() {
+    # Check if /proc/version contains Microsoft and WSL2
+    if grep -qi "microsoft.*wsl2\|wsl2.*microsoft" /proc/version 2>/dev/null; then
+        return 0  # WSL2 detected
+    else
+        return 1  # Not WSL2
+    fi
+}
+
 # WSL-specific environment settings
-if [ -z "$WSL_DISTRO_NAME" ]; then
+if [ ! is_wsl2 ]; then
     return
 fi
 
