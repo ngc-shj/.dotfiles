@@ -2,7 +2,7 @@
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zprofile.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zprofile.pre.zsh"
 
 if [[ -d "$ZDOTDIR/profile.d" ]]; then
-    for rc in "${ZDOTDIR}/profile.d"/*.(zsh|sh); do
+    for rc in "$ZDOTDIR/profile.d"/*.(zsh|sh)(N); do
        [[ -r "$rc" ]] && builtin source "$rc"
     done
 fi

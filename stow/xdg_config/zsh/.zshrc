@@ -2,7 +2,7 @@
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
 if [[ -d "$ZDOTDIR/rc.d" ]]; then
-    for rc in "${ZDOTDIR}/rc.d"/*.(zsh|sh); do
+    for rc in "$ZDOTDIR/rc.d"/*.(zsh|sh)(N); do
        [[ -r "$rc" ]] && builtin source "$rc"
     done
 fi
