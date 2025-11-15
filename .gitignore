@@ -124,6 +124,7 @@ tags
 # Shell Environment - Local Machine-Specific Configurations
 # These files contain user-specific settings that should not be shared
 stow/xdg_config/bash/rc.d/local.sh
+stow/xdg_config/zsh/env.d/local.zsh
 stow/xdg_config/zsh/rc.d/local.zsh
 
 # Zsh Theme - Generated/Downloaded Files
