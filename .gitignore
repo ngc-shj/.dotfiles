@@ -131,6 +131,10 @@ stow/xdg_config/zsh/rc.d/local.zsh
 # Purification theme is downloaded during setup, not version controlled
 stow/xdg_config/zsh/purification/*
 
+# Zsh Session Files - User-Specific Session Data
+# Session files contain user-specific session history
+stow/xdg_config/zsh/.zsh_sessions/
+
 # SSH Configuration - Sensitive Connection Details
 # SSH configs contain private server information and credentials
 stow/home/.ssh/conf.d/*/config

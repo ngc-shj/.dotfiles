@@ -15,7 +15,14 @@ mkdir -p $XDG_CACHE_HOME/zsh
 mkdir -p $ZDOTDIR
 
 # Platform-specific environment
-export SSH_SK_PROVIDER=/usr/local/lib/sk-libfido2.dylib
+# SSH Security Key Provider (FIDO2/U2F support for SSH keys)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS: Homebrew installation path
+    export SSH_SK_PROVIDER=/usr/local/lib/sk-libfido2.dylib
+elif [[ -f "/usr/lib/x86_64-linux-gnu/libsk-libfido2.so" ]]; then
+    # Linux: Standard library path
+    export SSH_SK_PROVIDER=/usr/lib/x86_64-linux-gnu/libsk-libfido2.so
+fi
 
 # Load environment variables and PATH from env.d (for all shells)
 # This ensures PATH is available even in non-login shells (e.g., GUI-launched terminals)

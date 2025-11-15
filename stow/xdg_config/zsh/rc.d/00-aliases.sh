@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 # Git aliases
 alias gs='git status'
@@ -7,7 +7,7 @@ alias gp='git push'
 alias gpo='git push origin'
 alias gtd='git tag --delete'
 alias gtdr='git tag --delete origin'
-alias gr='git branch -r'
+alias gbr='git branch -r'
 alias gplo='git pull origin'
 alias gb='git branch '
 alias gc='git commit'

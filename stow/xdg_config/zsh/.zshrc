@@ -40,7 +40,7 @@ fi
 # Load interactive shell configurations
 if [[ -d "$ZDOTDIR/rc.d" ]]; then
     for rc in "$ZDOTDIR/rc.d"/*.(zsh|sh)(N); do
-       [[ -r "$rc" ]] && builtin source "$rc"
+       [[ -r "$rc" ]] && builtin source "$rc" || continue
     done
 fi
 

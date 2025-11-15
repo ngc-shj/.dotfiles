@@ -27,7 +27,4 @@ cask "karabiner-elements"
 cask "microsoft-office"
 cask "ykman"
 
-# Terminal
-cask "iterm2"
-
 
