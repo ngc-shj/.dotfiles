@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # WSL-specific environment settings
-if [ ! is_wsl2 ]; then
+if ! is_wsl2; then
     return
 fi
 

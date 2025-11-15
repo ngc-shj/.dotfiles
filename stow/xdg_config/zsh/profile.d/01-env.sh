@@ -19,14 +19,16 @@ export LESSHISTSIZE=1000000
 
 # XDG Base Directory
 
-# java
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# android
+export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
 # docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 # dotnet
 export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 # gradle
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+# java
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 # keras
 export KERAS_HOME="$XDG_STATE_HOME"/keras
 # redis
