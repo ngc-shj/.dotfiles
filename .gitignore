@@ -117,28 +117,49 @@ tags
 *.orig
 *.tmp
 
-# bash
-stow/xdg_config/bash/rc.d/local.sh
+################################################################################
+# Custom Dotfiles Configuration
+################################################################################
 
-# zsh
-stow/xdg_config/zsh/purification/*
+# Shell Environment - Local Machine-Specific Configurations
+# These files contain user-specific settings that should not be shared
+stow/xdg_config/bash/rc.d/local.sh
 stow/xdg_config/zsh/rc.d/local.zsh
 
-# ssh
+# Zsh Theme - Generated/Downloaded Files
+# Purification theme is downloaded during setup, not version controlled
+stow/xdg_config/zsh/purification/*
+
+# SSH Configuration - Sensitive Connection Details
+# SSH configs contain private server information and credentials
 stow/home/.ssh/conf.d/*/config
 
-# git
+# Git Configuration - User-Specific Settings
+# Git configs contain personal email, name, and account-specific settings
 stow/xdg_config/git/*
 !stow/xdg_config/git/config
 !stow/xdg_config/git/*.conf
 !stow/xdg_config/git/ignore
 
-# dircolors
+# Dircolors - User-Specific Color Schemes
 stow/xdg_config/dircolors/*
 
-# nvim
+# Neovim - Plugins and Generated Files
+# Only track init.vim, plugins are managed by plugin manager
 stow/xdg_config/nvim/*
 !stow/xdg_config/nvim/init.vim
 
-# credentials
+# Security - Credential Files
+# Never commit any file containing credentials or API keys
 *credentials*
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+
+# AI Assistant Instructions
+# CLAUDE.md should be version controlled to guide AI assistants
+!CLAUDE.md
