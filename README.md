@@ -76,25 +76,6 @@ The setup script will:
         └── zsh/      # Zsh configuration
 ```
 
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/ngc-shj/.dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-```
-
-2. Run the setup script:
-```bash
-zsh ~/.dotfiles/scripts/setup.zsh
-```
-
-The setup script will:
-- Install Homebrew if not present
-- Install required packages and applications
-- Configure development tools
-- Set up dotfiles using GNU Stow
-
 ## Configuration Details
 
 ### Zsh Configuration
@@ -144,6 +125,62 @@ The setup script will:
 - macOS
 - Linux
 - Windows Subsystem for Linux (WSL)
+
+## Troubleshooting
+
+### Setup Script Issues
+
+**Problem**: `stow` command not found during setup
+```bash
+# Solution: Install stow manually first
+brew install stow
+```
+
+**Problem**: Permission denied errors
+```bash
+# Solution: Ensure you have write permissions to ~ and ~/.config
+ls -la ~ ~/.config
+```
+
+### Shell Configuration Issues
+
+**Problem**: Changes not taking effect
+```bash
+# Solution: Reload shell configuration
+source ~/.zshenv  # or restart your terminal
+```
+
+**Problem**: PATH not set correctly in GUI applications (macOS)
+- This is expected - GUI apps launched from Finder use login shell
+- The env.d/ structure ensures PATH is available in all contexts
+- If issues persist, try: `killall Dock` to restart GUI
+
+### WSL-Specific Issues
+
+**Problem**: SSH agent forwarding not working
+```bash
+# Check if npiperelay is properly configured
+ls -la ~/.ssh/agent.sock
+# Re-run WSL setup if needed
+zsh ~/.dotfiles/scripts/wsl/npiperelay-setup.sh
+```
+
+**Problem**: Windows paths not accessible
+- Ensure WSL interop is enabled: `/proc/sys/fs/binfmt_misc/WSLInterop`
+- Check `wsl.conf` settings
+
+### Platform Detection
+
+**Problem**: Wrong platform detected
+```bash
+# Check detection logic
+echo $OSTYPE
+cat /proc/version  # Linux/WSL only
+# Manually run platform-specific setup if needed
+zsh ~/.dotfiles/scripts/macos/dev-gui-setup.sh  # macOS example
+```
+
+For more help, please [open an issue](https://github.com/ngc-shj/.dotfiles/issues).
 
 ## License
 
