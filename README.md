@@ -33,6 +33,29 @@ A comprehensive dotfiles setup for managing development environment configuratio
     - GUI applications
     - General applications
 
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/ngc-shj/.dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+
+# (Optional) Create a feature branch for customizations
+git checkout -b feature/my-customizations
+
+# Run the setup script - automatically detects macOS/Linux/WSL
+zsh scripts/setup.zsh
+```
+
+The setup script will:
+- Detect your operating system automatically
+- Install Homebrew if not present (macOS/Linux/WSL)
+- Install packages from categorized Brewfiles
+- Deploy dotfiles using GNU Stow
+- Configure shell environment, Git, Neovim, and other tools
+
+**Note**: If `stow` is not installed, the setup script will install it via Homebrew.
+
 ## Directory Structure
 
 ```
