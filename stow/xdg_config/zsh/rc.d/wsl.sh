@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# WSL-specific environment settings
-if ! is_wsl2; then
+# WSL-specific RC settings (interactive shell functions)
+# Check if is_wsl2 function exists and we're on WSL2
+if ! type is_wsl2 &>/dev/null || ! is_wsl2; then
     return
 fi
 
