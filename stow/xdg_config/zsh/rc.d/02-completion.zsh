@@ -91,7 +91,7 @@ zstyle ':completion:*' file-sort change reverse
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # npm completion
-if [ command -v npm >/dev/null 2>&1 ]; then
+if command -v npm &>/dev/null; then
     eval "npm completion" > /dev/null
 fi
 
