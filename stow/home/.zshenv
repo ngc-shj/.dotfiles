@@ -1,5 +1,9 @@
 # [Configuring Zsh Without Dependencies](https://thevaluable.dev/zsh-install-configure-mouseless/)
 
+# Disable Amazon Q qterm (PTY wrapper) to improve shell startup performance
+# qterm launches a new shell which causes double initialization
+export Q_TERM=1
+
 # XDG Base Directory Specification
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_STATE_HOME="$HOME/.local/state"

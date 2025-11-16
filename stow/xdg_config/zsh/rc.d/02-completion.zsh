@@ -7,16 +7,15 @@
 # [A Guide to the Zsh Completion With Examples](https://thevaluable.dev/zsh-completion-guide-examples/)
 # [zsh zstyle](https://voidy21.hatenablog.jp/entry/20090902/1251918174)
 
-# completion system initialization
+# Add homebrew completions to fpath
+# Cache brew --prefix to avoid repeated slow lookups
 if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-    autoload -Uz compinit
-    compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+    HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-$(brew --prefix)}"
+    FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 fi
 
-# zplug initialization
-export ZPLUG_HOME=$(brew --prefix)/opt/zplug
+# zplug initialization (must come before compinit to set up fpath correctly)
+export ZPLUG_HOME="${HOMEBREW_PREFIX:-$(brew --prefix)}/opt/zplug"
 source $ZPLUG_HOME/init.zsh
 
 # zplug plugins
@@ -26,6 +25,31 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug check || zplug install
 zplug load
+
+# Completion system initialization - AFTER zplug to ensure fpath is complete
+# Skip if compinit was already called (e.g., by zplug)
+if ! (( $+functions[compdef] )); then
+    autoload -Uz compinit
+
+    # Optimize compinit by using cache and skipping security checks
+    # Only regenerate compdump once a day
+    ZCOMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+
+    # Compile completion dump if it exists but isn't compiled yet
+    if [[ -s "$ZCOMPDUMP" && (! -s "${ZCOMPDUMP}.zwc" || "$ZCOMPDUMP" -nt "${ZCOMPDUMP}.zwc") ]]; then
+        zcompile "$ZCOMPDUMP"
+    fi
+
+    # Check if dump needs regeneration (older than 24 hours or doesn't exist)
+    if [[ ! -s "$ZCOMPDUMP" || $(date -r "$ZCOMPDUMP" +%s) -lt $(( $(date +%s) - 86400 )) ]]; then
+        # Regenerate completion dump
+        compinit -d "$ZCOMPDUMP"
+        zcompile "$ZCOMPDUMP"
+    else
+        # Use cached dump, skip security checks for speed
+        compinit -C -d "$ZCOMPDUMP"
+    fi
+fi
 
 # setopt
 setopt auto_param_slash     # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
@@ -90,12 +114,16 @@ zstyle ':completion:*' file-sort change reverse
 # Completion Matching Control
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# npm completion
-if command -v npm &>/dev/null; then
-    eval "npm completion" > /dev/null
-fi
-
-# api-creds completion
-if command -v api-creds >/dev/null 2>&1; then
-    source <(api-creds completion zsh)
-fi
+# npm and api-creds completions are commented out for performance
+# These commands are slow to execute on every shell startup
+# If you need them, uncomment and consider caching the output
+#
+# npm completion:
+# if command -v npm &>/dev/null; then
+#     eval "npm completion"
+# fi
+#
+# api-creds completion:
+# if command -v api-creds >/dev/null 2>&1; then
+#     source <(api-creds completion zsh)
+# fi
