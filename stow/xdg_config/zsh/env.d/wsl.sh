@@ -16,7 +16,8 @@ if ! is_wsl2; then
 fi
 
 # Windows Subsystem for Linux
-path_prepend /usr/local/cuda/bin /usr/lib/wsl/lib
+# Note: NVIDIA CUDA bin paths are handled by nv_path.sh
+path_prepend /usr/lib/wsl/lib
 path_append /mnt/c/Windows \
     /mnt/c/Windows/System32/OpenSSH \
     /mnt/c/Windows/System32/Wbem \
