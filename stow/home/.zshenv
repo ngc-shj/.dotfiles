@@ -32,6 +32,6 @@ fi
 # This ensures PATH is available even in non-login shells (e.g., GUI-launched terminals)
 if [[ -d "$ZDOTDIR/env.d" ]]; then
     for rc in "$ZDOTDIR/env.d"/*.(zsh|sh)(N); do
-        [[ -r "$rc" ]] && builtin source "$rc"
+        [[ -r "$rc" ]] && builtin source "$rc" || continue
     done
 fi
