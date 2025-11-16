@@ -18,6 +18,12 @@ mkdir -p $XDG_DATA_HOME
 mkdir -p $XDG_CACHE_HOME/zsh
 mkdir -p $ZDOTDIR
 
+# Move zsh session files to XDG_STATE_HOME (macOS Terminal.app)
+# Session data (history restoration, etc.) belongs in state directory, not config
+# Old location: $ZDOTDIR/.zsh_sessions/ (can be safely deleted after migration)
+# New location: $XDG_STATE_HOME/zsh/sessions/
+export SHELL_SESSIONS_DIR="$XDG_STATE_HOME/zsh/sessions"
+
 # Platform-specific environment
 # SSH Security Key Provider (FIDO2/U2F support for SSH keys)
 if [[ "$OSTYPE" == "darwin"* ]]; then
