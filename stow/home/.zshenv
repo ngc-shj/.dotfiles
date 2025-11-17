@@ -26,13 +26,19 @@ export SHELL_SESSIONS_DIR="$XDG_STATE_HOME/zsh/sessions"
 
 # Platform-specific environment
 # SSH Security Key Provider (FIDO2/U2F support for SSH keys)
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS: Homebrew installation path
-    export SSH_SK_PROVIDER=/usr/local/lib/sk-libfido2.dylib
-elif [[ -f "/usr/lib/x86_64-linux-gnu/libsk-libfido2.so" ]]; then
-    # Linux: Standard library path
-    export SSH_SK_PROVIDER=/usr/lib/x86_64-linux-gnu/libsk-libfido2.so
-fi
+# Auto-detect libsk-libfido2 library location
+for sk_provider in \
+    /usr/local/lib/libsk-libfido2.dylib \
+    /opt/homebrew/lib/libsk-libfido2.dylib \
+    /usr/lib/x86_64-linux-gnu/libsk-libfido2.so \
+    /usr/lib/aarch64-linux-gnu/libsk-libfido2.so \
+    /usr/lib/libsk-libfido2.so; do
+    if [[ -f "$sk_provider" ]]; then
+        export SSH_SK_PROVIDER="$sk_provider"
+        break
+    fi
+done
+unset sk_provider
 
 # Load environment variables and PATH from env.d (for all shells)
 # This ensures PATH is available even in non-login shells (e.g., GUI-launched terminals)
