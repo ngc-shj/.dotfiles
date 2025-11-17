@@ -13,3 +13,7 @@ brew "zsh-history-substring-search"
 brew "pure"
 
 brew "socat"
+
+# SSH FIDO2/U2F security key support
+tap "theseal/ssh-askpass"
+brew "michaelroosz/ssh/libsk-libfido2-install"
