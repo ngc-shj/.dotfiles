@@ -40,4 +40,11 @@ if [[ -d "$ZDOTDIR/env.d" ]]; then
     for rc in "$ZDOTDIR/env.d"/*.(zsh|sh)(N); do
         [[ -r "$rc" ]] && builtin source "$rc" || continue
     done
+
+    # On macOS, save PATH after env.d loading
+    # /etc/zprofile runs path_helper which reorders PATH, moving custom paths to the end
+    # We'll restore this PATH in profile.d/00-restore-paths.sh
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        export ZSHENV_PATH="$PATH"
+    fi
 fi
