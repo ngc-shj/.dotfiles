@@ -5,7 +5,7 @@
 # Check if conda exists
 if [ -f "$HOME/miniconda3/bin/conda" ]; then
     # Add conda to PATH but don't initialize yet
-    export PATH="$HOME/miniconda3/bin:$PATH"
+    export PATH="$PATH:$HOME/miniconda3/bin"
 
     # Create a lazy-loading wrapper function
     conda() {

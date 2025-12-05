@@ -1,6 +1,3 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-
 # Lazy load conda to improve shell startup time
 # Conda initialization is deferred until first use of conda command
 if [[ -f "$ZDOTDIR/env.d/miniconda3.sh" ]]; then
@@ -44,5 +41,3 @@ if [[ -d "$ZDOTDIR/rc.d" ]]; then
     done
 fi
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
