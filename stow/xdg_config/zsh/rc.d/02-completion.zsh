@@ -16,6 +16,7 @@ fi
 
 # zplug initialization (must come before compinit to set up fpath correctly)
 export ZPLUG_HOME="${HOMEBREW_PREFIX:-$(brew --prefix)}/opt/zplug"
+export ZPLUG_CACHE_DIR="$XDG_CACHE_HOME/zplug"
 source $ZPLUG_HOME/init.zsh
 
 # zplug plugins
