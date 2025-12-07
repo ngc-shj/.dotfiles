@@ -1,0 +1,10 @@
+{
+  "Keymap": {
+    "C-a": "peco.BeginningOfLine",
+    "C-e": "peco.EndOfLine",
+    "C-k": "peco.KillEndOfLine",
+    "C-u": "peco.KillBeginningOfLine",
+    "C-f": "peco.ForwardChar",
+    "C-b": "peco.BackwardChar"
+  }
+}

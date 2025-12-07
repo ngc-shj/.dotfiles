@@ -14,8 +14,13 @@ bindkey -M menuselect 'l' vi-forward-char
 
 # history
 function peco-select-history() {
-  BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
+  local selected="$(\history -n -r 1 | peco --query "$LBUFFER")"
+  if [ -n "$selected" ]; then
+    # Replace literal backslash-n with actual newline
+    local nl=$'\n'
+    BUFFER="${selected//\\n/${nl}}"
+    CURSOR=$#BUFFER
+  fi
   zle clear-screen
 }
 zle -N peco-select-history
