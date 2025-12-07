@@ -19,7 +19,7 @@ function peco-select-history() {
     # Replace literal backslash-n with actual newline
     local nl=$'\n'
     BUFFER="${selected//\\n/${nl}}"
-    CURSOR=$#BUFFER
+    CURSOR=${#BUFFER}
   fi
   zle clear-screen
 }
@@ -39,7 +39,7 @@ fi
 function peco-cdr () {
     local selected_dir="$(cdr -l | sed 's/^[0-9]* *//' | peco --prompt="cdr >" --query "$LBUFFER")"
     if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
+        BUFFER="cd ${(q)selected_dir}"
         zle accept-line
     fi
 }
@@ -50,10 +50,9 @@ bindkey '^u' peco-cdr
 function peco-ghq () {
     local selected_dir="$(ghq list -p | peco --query "$LBUFFER")"
     if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
+        BUFFER="cd ${(q)selected_dir}"
         zle accept-line
     fi
-    zle clear-screen
 }
 zle -N peco-ghq
 bindkey '^]' peco-ghq
