@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+# Pure prompt performance settings
+# Disable git pull check to prevent delays from background git fetch
+PURE_GIT_PULL=0
+
 # Load prompt theme
 # fpath+=($ZDOTDIR/purification)
 # autoload -Uz promptinit && promptinit
