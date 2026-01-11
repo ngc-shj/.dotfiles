@@ -54,3 +54,17 @@ alias k='kubectl'
 
 # wget aliases
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
+
+# ssh aliases
+(( $+commands[smart-ssh] )) && alias ssh='smart-ssh'
+
+# tailscale aliases (macOS)
+if [[ -x /Applications/Tailscale.app/Contents/MacOS/Tailscale ]]; then
+  alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
+  alias ts='tailscale'
+  alias tss='tailscale status'
+  alias tsup='tailscale up'
+  alias tsdown='tailscale down'
+  alias tsip='tailscale ip'
+  alias tsping='tailscale ping'
+fi
