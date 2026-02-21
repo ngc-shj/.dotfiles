@@ -68,3 +68,11 @@ if [[ -x /Applications/Tailscale.app/Contents/MacOS/Tailscale ]]; then
   alias tsip='tailscale ip'
   alias tsping='tailscale ping'
 fi
+
+# claude-code aliases
+if (( $+commands[claude] )); then
+  local _ollama_host="http://gx10-a9c0:11434"
+  alias claude-opus='unset ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN; export ANTHROPIC_API_KEY="your-api-key"; claude --model claude-opus-4-6'
+  alias claude-20b='export ANTHROPIC_BASE_URL="'"${_ollama_host}"'" ANTHROPIC_AUTH_TOKEN="ollama" ANTHROPIC_API_KEY=""; claude --model gpt-oss:20b'
+  alias claude-120b='export ANTHROPIC_BASE_URL="'"${_ollama_host}"'" ANTHROPIC_AUTH_TOKEN="ollama" ANTHROPIC_API_KEY=""; claude --model gpt-oss:120b'
+fi
