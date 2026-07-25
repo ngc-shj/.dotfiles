@@ -25,6 +25,10 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug check || zplug install
+
+# Autosuggestions performance: prevent widget rebinding on each precmd
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
 zplug load
 
 # Completion system initialization - AFTER zplug to ensure fpath is complete
