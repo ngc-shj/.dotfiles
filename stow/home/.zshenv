@@ -11,6 +11,17 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
+# Suppress the bare `compinit` that Ubuntu's /etc/zsh/zshrc runs. It executes
+# before rc.d/02-completion.zsh and so wins that file's `$+functions[compdef]`
+# guard, dumping to compinit's default of $ZDOTDIR/.zcompdump — inside the
+# dotfiles repo. Skipping it lets rc.d/02-completion.zsh place the dump under
+# XDG_CACHE_HOME instead. Harmless on non-Ubuntu systems, which never read it.
+#
+# Ubuntu documents this variable as belonging in $ZDOTDIR/.zshenv, but that
+# file is never sourced: zsh finishes the .zshenv stage before ZDOTDIR is set
+# here, so ~/.zshenv is the only place it can take effect.
+skip_global_compinit=1
+
 # Create required directories
 mkdir -p $XDG_CONFIG_HOME
 mkdir -p $XDG_STATE_HOME
