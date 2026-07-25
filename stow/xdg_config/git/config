@@ -10,6 +10,17 @@
 [credential]
 	helper = cache --timeout=86400
 
+; gh is resolved from PATH so the same config works on both Homebrew
+; prefixes (/opt/homebrew on macOS, /home/linuxbrew/.linuxbrew on Linux).
+; The empty helper resets the inherited cache helper above for these hosts.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
