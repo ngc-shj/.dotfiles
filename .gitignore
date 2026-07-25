@@ -128,12 +128,19 @@ stow/xdg_config/zsh/env.d/local.zsh
 stow/xdg_config/zsh/rc.d/local.zsh
 
 # Zsh Theme - Generated/Downloaded Files
-# Purification theme is downloaded during setup, not version controlled
-stow/xdg_config/zsh/purification/*
+# Purification theme is downloaded during setup, not version controlled.
+# Matches the entry itself, not its contents: setup leaves a symlink to a
+# ghq-managed clone, which a trailing /* never matches.
+stow/xdg_config/zsh/purification
 
 # Zsh Session Files - User-Specific Session Data
 # Session files contain user-specific session history
 stow/xdg_config/zsh/.zsh_sessions/
+
+# Zsh Completion Dump - Generated Cache
+# Host-suffixed variants (.zcompdump.<host>.<pid>) appear when compinit
+# cannot take the lock on the plain file
+stow/xdg_config/zsh/.zcompdump*
 
 # SSH Configuration - Sensitive Connection Details
 # SSH configs contain private server information and credentials
