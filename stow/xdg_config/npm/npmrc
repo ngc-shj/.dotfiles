@@ -1,3 +1,4 @@
-prefix=/opt/homebrew
+; prefix is intentionally unset: npm derives it from its own install location,
+; which differs per platform (/opt/homebrew vs /home/linuxbrew/.linuxbrew)
 cache=${XDG_CACHE_HOME}/npm
 init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
