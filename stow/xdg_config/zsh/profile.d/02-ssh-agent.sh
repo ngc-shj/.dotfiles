@@ -6,7 +6,11 @@ if [ "$WSL_DISTRO_NAME" ]; then
     ss -a | grep -q $SSH_AUTH_SOCK
     if [ $? -ne 0 ]; then
         rm -f $SSH_AUTH_SOCK
-        (setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) >/dev/null 2>&1
+        # socat outlives this shell, so detach all three fds, not just the two
+        # that were noisy: an inherited stdin leaves the daemon holding the
+        # login shell's terminal open for as long as it runs. npiperelay is
+        # unaffected either way -- socat hands it the accepted socket as fd 0.
+        (setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) </dev/null >/dev/null 2>&1
     fi
 
     return
