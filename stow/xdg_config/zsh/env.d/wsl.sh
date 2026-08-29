@@ -24,7 +24,11 @@ path_append /mnt/c/Windows \
     /mnt/c/Windows/System32/WindowsPowerShell/v1.0 \
     /mnt/c/Windows/system32
 
-WIN_USERNAME=$(powershell.exe '$env:UserName' | tr -d '\r\n')
+# Keep stdin away from the interop relay: a Windows binary launched here
+# inherits this shell's stdin and drains whatever is buffered in it. Under
+# sshd that pipe carries the session payload, so an unredirected .exe
+# silently eats the head of every scp/rsync/tar stream into this box.
+WIN_USERNAME=$(powershell.exe '$env:UserName' </dev/null | tr -d '\r\n')
 
 path_append /mnt/c/Users/${WIN_USERNAME}/AppData/Local/Microsoft/WindowsApps
 
