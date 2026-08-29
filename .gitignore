@@ -143,8 +143,12 @@ stow/xdg_config/zsh/.zsh_sessions/
 stow/xdg_config/zsh/.zcompdump*
 
 # SSH Configuration - Sensitive Connection Details
-# SSH configs contain private server information and credentials
-stow/home/.ssh/conf.d/*/config
+# SSH configs contain private server information and credentials.
+# Match config* so editor and script backups (config.bak-<timestamp>, config.old)
+# are covered too -- they hold the same hosts as the file they were copied from,
+# and the Backup.gitignore block above only catches a bare .bak suffix.
+stow/home/.ssh/conf.d/*/config*
+!stow/home/.ssh/conf.d/*/config.example
 
 # Git Configuration - User-Specific Settings
 # Git configs contain personal email, name, and account-specific settings
