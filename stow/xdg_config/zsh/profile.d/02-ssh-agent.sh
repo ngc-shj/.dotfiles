@@ -53,27 +53,29 @@ fi
 
 # Linux specific environment settings
 if [[ "$OSTYPE" == linux* ]]; then
-    # SSH Agent
+    # SSH Agent. Status goes to stderr and only in an interactive login:
+    # `ssh host zsh -lc cmd` hands stdout to the caller, which expects cmd's
+    # output alone. The same goes for ssh-add's passphrase prompt, which a
+    # non-interactive login has no one to answer.
     SSH_AGENT_INFO_FILE=~/.ssh/agent-info
 
-    echo -n "ssh-agent: "
     if [ -f "$SSH_AGENT_INFO_FILE" ]; then
-        source "$SSH_AGENT_INFO_FILE"
+        source "$SSH_AGENT_INFO_FILE" >/dev/null
         ssh-add -l >&/dev/null
         if [ $? -eq 2 ]; then
-            echo -n "ssh-agent: restart...."
+            [[ -o interactive ]] && print -u2 "ssh-agent: restart"
             ssh-agent > "$SSH_AGENT_INFO_FILE"
-            source "$SSH_AGENT_INFO_FILE"
+            source "$SSH_AGENT_INFO_FILE" >/dev/null
         fi
     else
-        echo -n "ssh-agent: start...."
+        [[ -o interactive ]] && print -u2 "ssh-agent: start"
         ssh-agent > "$SSH_AGENT_INFO_FILE"
-        source "$SSH_AGENT_INFO_FILE"
+        source "$SSH_AGENT_INFO_FILE" >/dev/null
     fi
 
     if ssh-add -l >&/dev/null; then
-        echo "ssh-agent: Identity is already stored."
-    else
+        [[ -o interactive ]] && print -u2 "ssh-agent: Identity is already stored."
+    elif [[ -o interactive ]]; then
         ssh-add
     fi
 fi
