@@ -3,7 +3,7 @@
 setopt share_history
 setopt hist_ignore_space
 
-mkdir -p "$XDG_STATE_HOME"/zsh
+[[ -d "$XDG_STATE_HOME"/zsh ]] || mkdir -p "$XDG_STATE_HOME"/zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000  # Bash: number of lines in history file

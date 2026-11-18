@@ -2,12 +2,11 @@
 # Check /proc/version for Microsoft WSL2 signature
 
 is_wsl2() {
-    # Check if /proc/version contains Microsoft and WSL2
-    if grep -qi "microsoft.*wsl2\|wsl2.*microsoft" /proc/version 2>/dev/null; then
-        return 0  # WSL2 detected
-    else
-        return 1  # Not WSL2
-    fi
+    # Check if /proc/version contains Microsoft and WSL2. Read it with zsh,
+    # not grep: this runs in every shell on every OS (see env.d/00-paths.zsh)
+    [[ -r /proc/version ]] || return 1
+    local version=${(L)"$(</proc/version)"}
+    [[ $version == *microsoft*wsl2* || $version == *wsl2*microsoft* ]]
 }
 
 # WSL-specific environment settings
