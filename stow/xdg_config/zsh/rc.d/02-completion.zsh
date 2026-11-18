@@ -14,47 +14,38 @@ if type brew &>/dev/null; then
     FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 fi
 
-# zplug initialization (must come before compinit to set up fpath correctly)
-export ZPLUG_HOME="${HOMEBREW_PREFIX:-$(brew --prefix)}/opt/zplug"
-export ZPLUG_CACHE_DIR="$XDG_CACHE_HOME/zplug"
-source $ZPLUG_HOME/init.zsh
+# Completion system initialization - after zsh-completions is on fpath
+autoload -Uz compinit
 
-# zplug plugins
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-history-substring-search"
-zplug check || zplug install
+# Optimize compinit by using cache and skipping security checks
+# Only regenerate compdump once a day
+ZCOMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
-# Autosuggestions performance: prevent widget rebinding on each precmd
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-zplug load
-
-# Completion system initialization - AFTER zplug to ensure fpath is complete
-# Skip if compinit was already called (e.g., by zplug)
-if ! (( $+functions[compdef] )); then
-    autoload -Uz compinit
-
-    # Optimize compinit by using cache and skipping security checks
-    # Only regenerate compdump once a day
-    ZCOMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
-
-    # Compile completion dump if it exists but isn't compiled yet
-    if [[ -s "$ZCOMPDUMP" && (! -s "${ZCOMPDUMP}.zwc" || "$ZCOMPDUMP" -nt "${ZCOMPDUMP}.zwc") ]]; then
-        zcompile "$ZCOMPDUMP"
-    fi
-
-    # Check if dump needs regeneration (older than 24 hours or doesn't exist)
-    if [[ ! -s "$ZCOMPDUMP" || $(date -r "$ZCOMPDUMP" +%s) -lt $(( $(date +%s) - 86400 )) ]]; then
-        # Regenerate completion dump
-        compinit -d "$ZCOMPDUMP"
-        zcompile "$ZCOMPDUMP"
-    else
-        # Use cached dump, skip security checks for speed
-        compinit -C -d "$ZCOMPDUMP"
-    fi
+# Compile completion dump if it exists but isn't compiled yet
+if [[ -s "$ZCOMPDUMP" && (! -s "${ZCOMPDUMP}.zwc" || "$ZCOMPDUMP" -nt "${ZCOMPDUMP}.zwc") ]]; then
+    zcompile "$ZCOMPDUMP"
 fi
+
+# Regenerate when the dump is missing or older than 24 hours; the glob
+# qualifier keeps the age check from forking date(1) on every shell
+fresh_dump=($ZCOMPDUMP(N.mh-24))
+if (( ! $#fresh_dump )); then
+    compinit -d "$ZCOMPDUMP"
+    zcompile "$ZCOMPDUMP"
+else
+    # Use cached dump, skip security checks for speed
+    compinit -C -d "$ZCOMPDUMP"
+fi
+
+# Plugins come from Homebrew (brewfiles/core), which installs and upgrades
+# them; zplug cost ~60ms of git/awk probing per interactive shell.
+# syntax-highlighting goes after compinit, and history-substring-search
+# after syntax-highlighting, as their READMEs ask.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1  # prevent widget rebinding on each precmd
+for plugin in zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search; do
+    [[ -r "$HOMEBREW_PREFIX/share/$plugin/$plugin.zsh" ]] && source "$HOMEBREW_PREFIX/share/$plugin/$plugin.zsh"
+done
+unset plugin fresh_dump
 
 # setopt
 setopt auto_param_slash     # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
