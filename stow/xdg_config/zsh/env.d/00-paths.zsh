@@ -7,7 +7,7 @@ fi
 
 # env.d also runs again in every nested zsh (see $ZDOTDIR/.zshenv), on top of
 # the values it inherits; keep these lists from growing duplicates each time.
-typeset -U path
+typeset -U PATH path
 typeset -TU LD_LIBRARY_PATH ld_library_path
 
 # common functions
