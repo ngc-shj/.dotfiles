@@ -15,6 +15,7 @@ fi
 # Added after /opt/bin so it appears earlier in PATH
 if [ -d "/usr/local/cuda" ]; then
     export CUDA_HOME="/usr/local/cuda"
-    export LD_LIBRARY_PATH="/usr/local/cuda/lib64:${LD_LIBRARY_PATH}"
+    ld_library_path=(/usr/local/cuda/lib64 $ld_library_path)
+    export LD_LIBRARY_PATH
     path_prepend /usr/local/cuda/bin
 fi

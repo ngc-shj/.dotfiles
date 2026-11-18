@@ -24,9 +24,8 @@ path_append /mnt/c/Windows \
     /mnt/c/Windows/System32/WindowsPowerShell/v1.0 \
     /mnt/c/Windows/system32
 
-# Autoloaded from an absolute path rather than defined here: a nested zsh
-# (tmux, `zsh -l`) inherits ZDOTDIR, looks for $ZDOTDIR/.zshenv and so never
-# reads env.d, yet profile.d and rc.d still need these.
+# Autoloaded from an absolute path so profile.d and rc.d can declare their own
+# dependency on these instead of relying on env.d having run first.
 autoload -Uz "$ZDOTDIR"/functions/wsl_{interop_enabled,require_interop}
 
 # env.d runs for every zsh, so launching a .exe here costs every shell a
@@ -57,7 +56,8 @@ fi
 
 # CUDA
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/lib/wsl/lib:${LD_LIBRARY_PATH}"
-export LDFLAGS="${LDFLAGS} -L/usr/lib/wsl/lib"
+ld_library_path=(/usr/local/cuda/lib64 /usr/lib/wsl/lib $ld_library_path)
+export LD_LIBRARY_PATH
+[[ " $LDFLAGS " == *" -L/usr/lib/wsl/lib "* ]] || export LDFLAGS="${LDFLAGS:+$LDFLAGS }-L/usr/lib/wsl/lib"
 export CUDA_DEVICE_ORDER="PCI_BUS_ID"
 export CUDA_VISIBLE_DEVICES=1,0

@@ -5,6 +5,11 @@ elif [ "$(uname)" = "Linux" ]; then
     [[ -d "/home/linuxbrew/.linuxbrew" ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+# env.d also runs again in every nested zsh (see $ZDOTDIR/.zshenv), on top of
+# the values it inherits; keep these lists from growing duplicates each time.
+typeset -U PATH path
+typeset -TU LD_LIBRARY_PATH ld_library_path
+
 # common functions
 path_append() {
     local ARG

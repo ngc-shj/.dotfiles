@@ -9,6 +9,10 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+
+# Already set to ours means an ancestor ran this file and the inherited PATH
+# is the order it built; see the end of the env.d block below.
+[[ "$ZDOTDIR" == "$XDG_CONFIG_HOME/zsh" ]] && inherited_path=$PATH
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Suppress the bare `compinit` that Ubuntu's /etc/zsh/zshrc runs. It executes
@@ -17,9 +21,10 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # dotfiles repo. Skipping it lets rc.d/02-completion.zsh place the dump under
 # XDG_CACHE_HOME instead. Harmless on non-Ubuntu systems, which never read it.
 #
-# Ubuntu documents this variable as belonging in $ZDOTDIR/.zshenv, but that
-# file is never sourced: zsh finishes the .zshenv stage before ZDOTDIR is set
-# here, so ~/.zshenv is the only place it can take effect.
+# Ubuntu documents this variable as belonging in $ZDOTDIR/.zshenv, but a
+# top-level zsh finishes the .zshenv stage before ZDOTDIR is set here, so this
+# file is where it takes effect ($ZDOTDIR/.zshenv only covers nested shells,
+# and does so by sourcing this file).
 skip_global_compinit=1
 
 # Create required directories
@@ -57,6 +62,15 @@ if [[ -d "$ZDOTDIR/env.d" ]]; then
     for rc in "$ZDOTDIR/env.d"/*.(zsh|sh)(N); do
         [[ -r "$rc" ]] && builtin source "$rc" || continue
     done
+
+    # env.d prepends some entries unconditionally (brew shellenv, golang.sh),
+    # so a second run floats them ahead of ~/bin and friends. Keep the order
+    # the ancestor built and append only what this run added; PATH is unique
+    # (00-paths.zsh), so the re-added entries drop out.
+    if [[ -n "$inherited_path" ]]; then
+        PATH="$inherited_path:$PATH"
+    fi
+    unset inherited_path
 
     # On macOS, save PATH after env.d loading
     # /etc/zprofile runs path_helper which reorders PATH, moving custom paths to the end
