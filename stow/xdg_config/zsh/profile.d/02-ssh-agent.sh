@@ -3,8 +3,8 @@
 if [ "$WSL_DISTRO_NAME" ]; then
     # The relay is a Windows binary; with interop off it would listen fine
     # and then fail every agent request, so leave SSH_AUTH_SOCK alone.
-    # wsl_require_interop comes from env.d/wsl.sh, which defines it on WSL2 only.
-    if (( $+functions[wsl_require_interop] )) && ! wsl_require_interop "ssh-agent relay (npiperelay.exe)"; then
+    autoload -Uz "$ZDOTDIR"/functions/wsl_{interop_enabled,require_interop}
+    if ! wsl_require_interop "ssh-agent relay (npiperelay.exe)"; then
         return
     fi
 

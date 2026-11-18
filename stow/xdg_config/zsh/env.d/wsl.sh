@@ -24,31 +24,10 @@ path_append /mnt/c/Windows \
     /mnt/c/Windows/System32/WindowsPowerShell/v1.0 \
     /mnt/c/Windows/system32
 
-# Interop can be switched off in /etc/wsl.conf ([interop] enabled=false).
-# The WSLInterop binfmt handler stays registered even then, so a .exe still
-# launches and only fails after /init's ~10s vsock timeout -- check the
-# setting instead of finding out the slow way. wsl.conf takes effect at the
-# next WSL restart, so an edit not yet applied reads as already in force.
-wsl_interop_enabled() {
-    local line section
-    [[ -r /etc/wsl.conf ]] || return 0
-    while IFS= read -r line; do
-        line=${${line%%[#;]*}//[[:space:]]/}
-        case $line in
-            \[*\]) section=${line:l} ;;
-            [Ee]nabled=*)
-                [[ $section == '[interop]' && ${${line#*=}:l} == false ]] && return 1 ;;
-        esac
-    done </etc/wsl.conf
-    return 0
-}
-
-# Return non-zero, saying why on stderr, when $1 needs interop but it is off.
-wsl_require_interop() {
-    wsl_interop_enabled && return 0
-    print -u2 -r -- "wsl: $1 skipped: interop is disabled in /etc/wsl.conf ([interop] enabled=false)"
-    return 1
-}
+# Autoloaded from an absolute path rather than defined here: a nested zsh
+# (tmux, `zsh -l`) inherits ZDOTDIR, looks for $ZDOTDIR/.zshenv and so never
+# reads env.d, yet profile.d and rc.d still need these.
+autoload -Uz "$ZDOTDIR"/functions/wsl_{interop_enabled,require_interop}
 
 # env.d runs for every zsh, so launching a .exe here costs every shell a
 # round trip through interop. The Windows user name never changes; cache it.

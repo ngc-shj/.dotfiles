@@ -1,0 +1,4 @@
+# Return non-zero, saying why on stderr, when $1 needs interop but it is off.
+wsl_interop_enabled && return 0
+print -u2 -r -- "wsl: $1 skipped: interop is disabled in /etc/wsl.conf ([interop] enabled=false)"
+return 1
