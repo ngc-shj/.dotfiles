@@ -28,11 +28,11 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 skip_global_compinit=1
 
 # Create required directories
-mkdir -p $XDG_CONFIG_HOME
-mkdir -p $XDG_STATE_HOME
-mkdir -p $XDG_DATA_HOME
-mkdir -p $XDG_CACHE_HOME/zsh
-mkdir -p $ZDOTDIR
+# (only when missing: an exec per shell is not free, see env.d/00-paths.zsh)
+for dir in $XDG_CONFIG_HOME $XDG_STATE_HOME $XDG_DATA_HOME $XDG_CACHE_HOME/zsh $ZDOTDIR; do
+    [[ -d "$dir" ]] || mkdir -p "$dir"
+done
+unset dir
 
 # Move zsh session files to XDG_STATE_HOME (macOS Terminal.app)
 # Session data (history restoration, etc.) belongs in state directory, not config

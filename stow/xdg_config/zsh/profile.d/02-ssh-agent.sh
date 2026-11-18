@@ -24,36 +24,35 @@ if [ "$WSL_DISTRO_NAME" ]; then
 fi
 
 # macOS specific environment settings
-if [ $(uname) = "Darwin" ]; then
+if [[ "$OSTYPE" == darwin* ]]; then
     # GUI terminals inherit SSH_AUTH_SOCK from launchd and `ssh -A` brings its
     # own; an ssh login to this machine gets neither, so start (or reuse) an
-    # agent only in that case. `ssh-add -l` exits 2 when no agent is reachable,
-    # 1 when one is reachable but holds no keys.
-    ssh-add -l >&/dev/null
-    if [ $? -eq 2 ]; then
+    # agent only in that case. A live socket and agent pid stand in for
+    # `ssh-add -l`: every exec at login can stall on the endpoint scanner
+    # (see env.d/00-paths.zsh), so the usual paths here run none.
+    if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
         SSH_AGENT_INFO_FILE=~/.ssh/agent-info
 
-        if [ -f "$SSH_AGENT_INFO_FILE" ]; then
+        if [[ -f "$SSH_AGENT_INFO_FILE" ]]; then
             source "$SSH_AGENT_INFO_FILE" >/dev/null
         fi
 
-        ssh-add -l >&/dev/null
-        if [ $? -eq 2 ]; then
+        if [[ ! -S "$SSH_AUTH_SOCK" ]] || ! kill -0 "$SSH_AGENT_PID" 2>/dev/null; then
             (umask 077; ssh-agent > "$SSH_AGENT_INFO_FILE")
             source "$SSH_AGENT_INFO_FILE" >/dev/null
-        fi
 
-        # Keys whose passphrase lives in the login Keychain load without a
-        # prompt; anything never added with `ssh-add --apple-use-keychain`
-        # still asks at connect time.
-        ssh-add --apple-load-keychain >&/dev/null
+            # Keys whose passphrase lives in the login Keychain load without a
+            # prompt; anything never added with `ssh-add --apple-use-keychain`
+            # still asks at connect time. A reused agent got them at its start.
+            ssh-add --apple-load-keychain >&/dev/null
+        fi
     fi
 
     return
 fi
 
 # Linux specific environment settings
-if [ $(uname) = "Linux" ]; then
+if [[ "$OSTYPE" == linux* ]]; then
     # SSH Agent
     SSH_AGENT_INFO_FILE=~/.ssh/agent-info
 
