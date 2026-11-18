@@ -7,6 +7,8 @@ if ! type is_wsl2 &>/dev/null || ! is_wsl2; then
 fi
 
 open() {
+    wsl_require_interop "open (explorer.exe)" || return 1
+
     if [ $# -eq 0 ]; then
         # Open current directory if no arguments provided
         /mnt/c/Windows/explorer.exe "$(wslpath -w .)"

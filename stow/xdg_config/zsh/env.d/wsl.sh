@@ -24,15 +24,38 @@ path_append /mnt/c/Windows \
     /mnt/c/Windows/System32/WindowsPowerShell/v1.0 \
     /mnt/c/Windows/system32
 
+# Interop can be switched off in /etc/wsl.conf ([interop] enabled=false).
+# The WSLInterop binfmt handler stays registered even then, so a .exe still
+# launches and only fails after /init's ~10s vsock timeout -- check the
+# setting instead of finding out the slow way. wsl.conf takes effect at the
+# next WSL restart, so an edit not yet applied reads as already in force.
+wsl_interop_enabled() {
+    local line section
+    [[ -r /etc/wsl.conf ]] || return 0
+    while IFS= read -r line; do
+        line=${${line%%[#;]*}//[[:space:]]/}
+        case $line in
+            \[*\]) section=${line:l} ;;
+            [Ee]nabled=*)
+                [[ $section == '[interop]' && ${${line#*=}:l} == false ]] && return 1 ;;
+        esac
+    done </etc/wsl.conf
+    return 0
+}
+
+# Return non-zero, saying why on stderr, when $1 needs interop but it is off.
+wsl_require_interop() {
+    wsl_interop_enabled && return 0
+    print -u2 -r -- "wsl: $1 skipped: interop is disabled in /etc/wsl.conf ([interop] enabled=false)"
+    return 1
+}
+
 # env.d runs for every zsh, so launching a .exe here costs every shell a
 # round trip through interop. The Windows user name never changes; cache it.
-# Under sshd WSL_INTEROP is unset and the interop callback never connects:
-# powershell.exe blocks ~10s (UtilAcceptVsock: accept4 failed 110) and
-# returns nothing, so without a cache an ssh session skips the lookup.
 WIN_USERNAME_CACHE="$XDG_CACHE_HOME/wsl/win-username"
 if [[ -s "$WIN_USERNAME_CACHE" ]]; then
     WIN_USERNAME=$(<"$WIN_USERNAME_CACHE")
-elif [[ -z "$SSH_CONNECTION" ]]; then
+elif wsl_interop_enabled; then
     # Keep stdin away from the interop relay: a Windows binary launched here
     # inherits this shell's stdin and drains whatever is buffered in it. Under
     # sshd that pipe carries the session payload, so an unredirected .exe
@@ -42,6 +65,10 @@ elif [[ -z "$SSH_CONNECTION" ]]; then
         mkdir -p "${WIN_USERNAME_CACHE:h}"
         print -r -- "$WIN_USERNAME" >"$WIN_USERNAME_CACHE"
     fi
+elif [[ -o interactive ]]; then
+    # Only interactive shells hear about it: scp and `ssh host cmd` would
+    # otherwise carry this line on stderr. Seeding the cache by hand fixes it.
+    wsl_require_interop "Windows user name lookup (WindowsApps not on PATH; write it to $WIN_USERNAME_CACHE)"
 fi
 unset WIN_USERNAME_CACHE
 
