@@ -11,27 +11,14 @@ if [[ -f "$ZDOTDIR/env.d/miniconda3.sh" ]]; then
 fi
 
 # Lazy load nvm to improve shell startup time
-# NVM initialization is deferred until first use of nvm/node/npm commands
-if [[ -f "$ZDOTDIR/env.d/nvm.sh" ]]; then
-    if [[ -d "$XDG_DATA_HOME/nvm" ]]; then
-        nvm() {
-            unfunction nvm node npm
-            source "$ZDOTDIR/env.d/nvm.sh"
-            nvm "$@"
-        }
-
-        node() {
-            unfunction nvm node npm
-            source "$ZDOTDIR/env.d/nvm.sh"
-            node "$@"
-        }
-
-        npm() {
-            unfunction nvm node npm
-            source "$ZDOTDIR/env.d/nvm.sh"
-            npm "$@"
-        }
-    fi
+# env.d/nvm.sh already puts the default node on PATH, so only the nvm
+# command itself needs loading on first use
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+    nvm() {
+        unfunction nvm
+        source "$NVM_DIR/nvm.sh"
+        nvm "$@"
+    }
 fi
 
 # Load interactive shell configurations
