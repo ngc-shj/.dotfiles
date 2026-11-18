@@ -6,7 +6,11 @@ if ! type is_wsl2 &>/dev/null || ! is_wsl2; then
     return
 fi
 
+autoload -Uz "$ZDOTDIR"/functions/wsl_{interop_enabled,require_interop}
+
 open() {
+    wsl_require_interop "open (explorer.exe)" || return 1
+
     if [ $# -eq 0 ]; then
         # Open current directory if no arguments provided
         /mnt/c/Windows/explorer.exe "$(wslpath -w .)"

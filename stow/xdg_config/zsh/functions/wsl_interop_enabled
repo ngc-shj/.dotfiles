@@ -1,0 +1,16 @@
+# Interop can be switched off in /etc/wsl.conf ([interop] enabled=false).
+# The WSLInterop binfmt handler stays registered even then, so a .exe still
+# launches and only fails after /init's ~10s vsock timeout -- check the
+# setting instead of finding out the slow way. wsl.conf takes effect at the
+# next WSL restart, so an edit not yet applied reads as already in force.
+local line section
+[[ -r /etc/wsl.conf ]] || return 0
+while IFS= read -r line; do
+    line=${${line%%[#;]*}//[[:space:]]/}
+    case $line in
+        \[*\]) section=${line:l} ;;
+        [Ee]nabled=*)
+            [[ $section == '[interop]' && ${${line#*=}:l} == false ]] && return 1 ;;
+    esac
+done </etc/wsl.conf
+return 0

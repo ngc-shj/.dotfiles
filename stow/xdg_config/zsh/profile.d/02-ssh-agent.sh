@@ -1,6 +1,13 @@
 
 # WSL specific environment settings
 if [ "$WSL_DISTRO_NAME" ]; then
+    # The relay is a Windows binary; with interop off it would listen fine
+    # and then fail every agent request, so leave SSH_AUTH_SOCK alone.
+    autoload -Uz "$ZDOTDIR"/functions/wsl_{interop_enabled,require_interop}
+    if ! wsl_require_interop "ssh-agent relay (npiperelay.exe)"; then
+        return
+    fi
+
     # SSH Agent relay
     export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
     ss -a | grep -q $SSH_AUTH_SOCK
