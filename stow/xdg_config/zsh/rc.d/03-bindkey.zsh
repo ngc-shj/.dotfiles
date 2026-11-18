@@ -6,6 +6,16 @@ bindkey -d
 # Enable Emacs keybind
 bindkey -e
 
+# Up/Down search history for what is already typed (zsh-history-substring-search,
+# loaded in 02-completion.zsh). Both the normal and the application-mode
+# sequences, since terminals send either depending on their keypad mode.
+if (( $+widgets[history-substring-search-up] )); then
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[OA' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+    bindkey '^[OB' history-substring-search-down
+fi
+
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
