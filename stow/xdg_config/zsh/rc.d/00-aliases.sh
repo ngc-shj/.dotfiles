@@ -20,7 +20,9 @@ alias glo='git log --pretty="oneline"'
 alias glol='git log --graph --oneline --decorate'
 
 # ls aliases
-cached_source dircolors "$XDG_CONFIG_HOME/dircolors/dircolors" gdircolors -b "$XDG_CONFIG_HOME/dircolors/dircolors"
+# Keyed by $TERM: the file only colors terminals its TERM lines match, so a
+# shell without a tty would otherwise cache an empty LS_COLORS for all
+cached_source "dircolors-${TERM:-dumb}" "$XDG_CONFIG_HOME/dircolors/dircolors" gdircolors -b "$XDG_CONFIG_HOME/dircolors/dircolors"
 alias ls='gls --color=auto'
 alias ll='gls -l --color=auto'
 alias la='gls -la --color=auto'
