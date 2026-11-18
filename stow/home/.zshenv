@@ -17,9 +17,10 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # dotfiles repo. Skipping it lets rc.d/02-completion.zsh place the dump under
 # XDG_CACHE_HOME instead. Harmless on non-Ubuntu systems, which never read it.
 #
-# Ubuntu documents this variable as belonging in $ZDOTDIR/.zshenv, but that
-# file is never sourced: zsh finishes the .zshenv stage before ZDOTDIR is set
-# here, so ~/.zshenv is the only place it can take effect.
+# Ubuntu documents this variable as belonging in $ZDOTDIR/.zshenv, but a
+# top-level zsh finishes the .zshenv stage before ZDOTDIR is set here, so this
+# file is where it takes effect ($ZDOTDIR/.zshenv only covers nested shells,
+# and does so by sourcing this file).
 skip_global_compinit=1
 
 # Create required directories
